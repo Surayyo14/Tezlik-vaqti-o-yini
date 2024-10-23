@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reaksiya Tezligi O‘yini</title>
+    <style>
+        #blok {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            display: none;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <h2>Tezlik vaqti o'yini</h2>
+    <p>Qizil kvadrat paydo bo‘lishini kuting va unga tezda bosing.</p>
+    <p>Reaksiyangiz: <span id="vaqt"></span> soniya</p>
+
+    <div id="blok" onclick="yakunla()"></div>
+
+    <script>
+        let startTime;
+
+        function random(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        function boshlash() {
+            let vaqt = random(1000, 5000);
+            setTimeout(function() {
+                let blok = document.getElementById('blok');
+                blok.style.display = 'block';
+                blok.style.top = random(50, 400) + 'px';
+                blok.style.left = random(50, 400) + 'px';
+                startTime = new Date().getTime();
+            }, vaqt);
+        }
+
+        function yakunla() {
+            let endTime = new Date().getTime();
+            let reactionTime = (endTime - startTime) / 1000;
+            document.getElementById('vaqt').textContent = reactionTime;
+            document.getElementById('blok').style.display = 'none';
+            boshlash();
+        }
+
+        boshlash();
+    </script>
+</body>
+</html>
